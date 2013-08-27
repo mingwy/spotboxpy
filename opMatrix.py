@@ -7,7 +7,7 @@ Created on Thu Jul 18 15:25:28 2013
 @author: User
 """
 import numpy as np
-import scipy as sci
+import scipy.linalg as sci
 from spotboxpy.opSpot.opSpot import OpSpot
 from spotboxpy.opSpot.char import char
 from spotboxpy.opSpot.disp import disp
@@ -72,8 +72,8 @@ class OpMatrix(OpSpot):
         
     def divide(self,b,mode):
         if mode == 1:
-            y = sci.linalg.lstsq(self.matrix,b)
+            y = sci.lstsq(self.matrix,b)
         else:
-            y = sci.linalg.lstsq(self.matrix.conj().T,b)
+            y = sci.lstsq(self.matrix.conj().T,b)
         
         return y

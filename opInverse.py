@@ -1,27 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-OPCONJ  Take the elementwise conjugate of a complex operator
-
-Created on Mon Jul 15 12:14:10 2013
+Created on Mon Aug 26 22:21:51 2013
 
 @author: User
 """
+import scipy.linalg as sci
 from opMatrix import OpMatrix
 from spotboxpy.opSpot.opSpot import OpSpot
 from spotboxpy.opSpot.disp import disp
 from spotboxpy.opSpot.isnumeric import isnumeric
 from spotboxpy.opSpot.isspot import isspot
 
-class OpConj(OpSpot):
+class OpInverse(OpSpot):
     def __new__(subtype,A):
         if isnumeric(A):
             A = OpMatrix(A)
-        
+            
         if not isspot(A):
             raise Exception ('Input operator is not valid.')
             return
-        
-        op = OpSpot.__new__(subtype,'Conj',A.m,A.n,A.conj())
+            
+        op = OpSpot.__new__(subtype,'Inverse',A.n,A.m,sci.inv(A))
         op.cflag = A.cflag
         op.linear = A.linear
         op.sweepflag = A.sweepflag
@@ -45,14 +44,15 @@ class OpConj(OpSpot):
         
     def char(self):
         string = self.children[0].char()
-        string = string.join(('Conj(',')'))
+        string = string.join(('inv(',')'))
         return string
         
     def multiply(self,x,mode):
-        op1 = self.children[0]
         if mode == 1:
-            y = op1.applyMultiply(x.conj(),1).conj()
+            A = self.children[0]
         else:
-            y = op1.applyMultiply(x.conj(),2).conj()
-        
+            A = self.children[0].conj().T
+            
+        y = sci.lstsq(A,x)
         return y
+            
