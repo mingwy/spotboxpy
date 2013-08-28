@@ -10,7 +10,12 @@ Created on Tue Jul 02 16:38:14 2013
 def char(A):
     m = A.m
     n = A.n
-    t = A.optype
-    string = '%s(%d,%d)' %(t,m,n)
+    
+    if m == 1 and n == 1:
+        string = str(A)
+    else:
+        t = A.optype
+        string = '%s(%d,%d)' %(t,m,n)
+        
     return string
     

@@ -60,7 +60,7 @@ class OpMatrix(OpSpot):
         return self.matrix
         
     def multiply(self,x,mode):
-        if np.isScalar(self.matrix):
+        if np.isscalar(self.matrix):
             y = self.matrix * x
         else:
             if mode == 1:
@@ -76,4 +76,4 @@ class OpMatrix(OpSpot):
         else:
             y = sci.lstsq(self.matrix.conj().T,b)
         
-        return y
+        return y[0]

@@ -55,5 +55,5 @@ class OpPInverse(OpSpot):
             A = self.children[0].conj().T
             
         y = sci.lstsq(A,x)
-        return y
+        return y[0]
             

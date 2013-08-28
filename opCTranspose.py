@@ -47,7 +47,7 @@ class OpCTranspose(OpSpot):
         op1 = self.children[0]
         string = op1.char()
         if op1.precedence > self.precedence:
-            string = string.join('(',')')
+            string = string.join(('(',')'))
         string = string + "'"
         return string
         

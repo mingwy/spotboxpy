@@ -7,8 +7,8 @@ Created on Tue Aug 27 17:16:09 2013
 @author: User
 """
 import numpy as np
-import scipy.sparse as sp
-import scipy.linalg as la
+import scipy.sparse as sparse
+import scipy.linalg as linalg
 from spotboxpy.opSpot.opSpot import OpSpot
 from spotboxpy.opSpot.disp import disp
 
@@ -16,7 +16,7 @@ class OpDiag(OpSpot):
     def __new__(subtype,D):
         D = D.flatten(1)
         n = np.size(D)
-        diag = sp.spdiags(D,0,n,n).toarray()
+        diag = sparse.spdiags(D,0,n,n).toarray()
         op = OpSpot.__new__(subtype,'Diag',n,n,diag)
         op.cflag = not np.isreal(D).all()
         op.sweepflag = True
@@ -49,8 +49,8 @@ class OpDiag(OpSpot):
         
     def divide(self,x,mode):
         if mode == 1:
-            y = la.lstsq(self.diag,x)
+            y = linalg.lstsq(self.diag,x)
         else:
-            y = la.lstsq(self.diag.conj().T,x)
+            y = linalg.lstsq(self.diag.conj().T,x)
         
-        return y
+        return y[0]
