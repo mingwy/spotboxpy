@@ -1,38 +1,41 @@
 # -*- coding: utf-8 -*-
 """
-OPINVERSE   (Pseudo) inverse of operator.
+OPTRANSPOSE   Transpose of an operator.
 
-Created on Mon Aug 26 22:21:51 2013
+Created on Tue Aug 27 17:00:19 2013
 
 @author: User
 """
-import scipy.linalg as sci
+from opConj import OpConj
+from opCTranspose import OpCTranspose
 from opMatrix import OpMatrix
 from spotboxpy.opSpot.opSpot import OpSpot
 from spotboxpy.opSpot.disp import disp
 from spotboxpy.opSpot.isnumeric import isnumeric
 from spotboxpy.opSpot.isspot import isspot
 
-class OpInverse(OpSpot):
+class OpTranspose(OpSpot):
     def __new__(subtype,A):
         if isnumeric(A):
             A = OpMatrix(A)
-            
+        
         if not isspot(A):
             raise Exception ('Input operator is not valid.')
             return
-            
-        op = OpSpot.__new__(subtype,'Inverse',A.n,A.m,sci.inv(A))
+        
+        op = OpSpot.__new__(subtype,'Transpose',A.n,A.m,A.T)
         op.cflag = A.cflag
         op.linear = A.linear
         op.sweepflag = A.sweepflag
         op.children.append(A)
+        op.opIntrnl = OpCTranspose(OpConj(A))
         disp(op)
         return op
         
     def __array_finalize__(self, op):
         if op is None: 
             return
+        self.opIntrnl = getattr(op,'opIntrnl',None)
         self.optype = getattr(op,'optype',None)
         self.m = getattr(op,'m',None)
         self.n = getattr(op,'n',None)
@@ -45,16 +48,14 @@ class OpInverse(OpSpot):
         
         
     def char(self):
-        string = self.children[0].char()
-        string = string.join(('inv(',')'))
+        op1 = self.children[0]
+        string = op1.char()
+        if op1.precedence > self.precedence:
+            string = string.join('(',')')
+        string = string + ".'"
         return string
         
     def multiply(self,x,mode):
-        if mode == 1:
-            A = self.children[0]
-        else:
-            A = self.children[0].conj().T
-            
-        y = sci.lstsq(A,x)
+        y = self.opIntrnl.applyMultiply(x,mode)
         return y
-            
+
