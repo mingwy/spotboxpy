@@ -9,7 +9,6 @@ Created on Wed Aug 28 15:16:12 2013
 import numpy as np
 from spotboxpy.opMatrix import OpMatrix
 from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.char import char
 from spotboxpy.opSpot.disp import disp
 from spotboxpy.opSpot.isnumeric import isnumeric
 from spotboxpy.opSpot.isspot import isspot
@@ -64,10 +63,10 @@ class OpFoG(OpSpot):
     def char(self):
         op1 = self.children[0]
         op2 = self.children[1]
-        string1 = char(op1)
+        string1 = op1.char()
         if op1.precedence > self.precedence:
             string1 = string1.join(('(',')'))
-        string2 = char(op2)
+        string2 = op2.char()
         if op2.precedence > self.precedence:
             string2 = string2.join(('(',')'))
         
