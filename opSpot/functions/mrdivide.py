@@ -7,18 +7,15 @@ Created on Thu Jul 18 12:25:23 2013
 @author: User
 """
 import numpy as np
-import scipy.linalg as sci
-from spotboxpy.opCTranspose import OpCTranspose
-from isscalar import isscalar
-from isspot import isspot
+from spotboxpy.opSpot.isspot import isspot
 
 def mrdivide(A,B):
     if isspot(A):
-        valA =  isscalar(A)
+        valA =  A.isscalar()
     else:
         valA = np.isscalar(A)
     if isspot(B):
-        valB =  isscalar(B)
+        valB =  B.isscalar()
     else:
         valB = np.isscalar(B)
         
@@ -27,7 +24,7 @@ def mrdivide(A,B):
     elif valA:
         y = (1.0/A) * B
     else:
-        y = sci.lstsq(B.conj().T,A.conj().T)
-        y = OpCTranspose(y[0])
+        y = np.linalg.lstsq(B.ctranspose(),A.ctranspose())
+        y = y[0].ctranspose()
     
     return y

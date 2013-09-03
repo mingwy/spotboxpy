@@ -5,11 +5,10 @@ Created on Thu Aug 15 14:40:52 2013
 @author: User
 """
 import numpy as np
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
-from spotboxpy.opMatrix import OpMatrix
+from opMatrix import OpMatrix
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpReal(OpSpot):
     def __new__(subtype,A):
@@ -19,13 +18,13 @@ class OpReal(OpSpot):
             raise Exception ('Input operator is not valid.')
             return
         
-        op = OpSpot.__new__(subtype,'Real',A.m,A.n,A.real)
+        op = OpSpot.__new__(subtype,'Real',A.m,A.n,A.double().real)
         op.cflag = False
         op.linear = A.linear
         op.sweepflag = A.sweepflag
         op.children.append(A)
         op.precedence = 1
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

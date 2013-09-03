@@ -9,10 +9,9 @@ Created on Tue Aug 27 17:00:19 2013
 from opConj import OpConj
 from opCTranspose import OpCTranspose
 from opMatrix import OpMatrix
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpTranspose(OpSpot):
     def __new__(subtype,A):
@@ -29,7 +28,7 @@ class OpTranspose(OpSpot):
         op.sweepflag = A.sweepflag
         op.children.append(A)
         op.opIntrnl = OpCTranspose(OpConj(A))
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

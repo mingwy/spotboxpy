@@ -7,10 +7,9 @@ Created on Mon Jul 15 12:14:10 2013
 @author: User
 """
 from opMatrix import OpMatrix
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpConj(OpSpot):
     def __new__(subtype,A):
@@ -21,12 +20,12 @@ class OpConj(OpSpot):
             raise Exception ('Input operator is not valid.')
             return
         
-        op = OpSpot.__new__(subtype,'Conj',A.m,A.n,A.conj())
+        op = OpSpot.__new__(subtype,'Conj',A.m,A.n,A.double().conj())
         op.cflag = A.cflag
         op.linear = A.linear
         op.sweepflag = A.sweepflag
         op.children.append(A)
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

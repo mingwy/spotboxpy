@@ -8,10 +8,9 @@ Created on Tue Jul 23 15:34:13 2013
 """
 import scipy.linalg as sci
 from opMatrix import OpMatrix
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpPInverse(OpSpot):
     def __new__(subtype,A):
@@ -26,7 +25,7 @@ class OpPInverse(OpSpot):
         op.linear = A.linear
         op.sweepflag = A.sweepflag
         op.children.append(A)
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

@@ -7,12 +7,10 @@ Created on Wed Aug 28 15:16:12 2013
 @author: User
 """
 import numpy as np
-from spotboxpy.opMatrix import OpMatrix
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
-from spotboxpy.opSpot.isscalar import isscalar
+from opMatrix import OpMatrix
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpFoG(OpSpot):
     def __new__(subtype,A,B):
@@ -25,11 +23,11 @@ class OpFoG(OpSpot):
             raise Exception ('One of the operators is not a valid input.')
             return
         
-        if not (isscalar(A) or isscalar(B) or A.n == B.m):
+        if not (A.isscalar() or B.isscalar() or A.n == B.m):
             raise Exception ('Operators are not compatible in size.')
             return
             
-        if isscalar(A) or isscalar(B):
+        if A.isscalar() or B.isscalar():
             m = max(A.m,B.m)
             n = max(A.n,B.n)
         else:
@@ -43,7 +41,7 @@ class OpFoG(OpSpot):
         op.children.append(A)
         op.children.append(B)
         op.precedence = 3
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

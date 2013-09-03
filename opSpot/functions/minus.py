@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Sum of two operators.
+Difference of two operators.
 
-Created on Tue Jul 16 15:22:30 2013
+Created on Tue Jul 16 15:07:37 2013
 
 @author: User
 """
-from spotboxpy.opOnes import OpOnes
-from spotboxpy.opSum import OpSum
 from isscalar import isscalar
 from size import size
 
-def plus(A,B):
+def minus(A,B):
+    from spotboxpy.opOnes import OpOnes
+    from spotboxpy.opMinus import OpMinus
     if isscalar(A):
         A = OpOnes(size(B)) * A
     if isscalar(B):
         B = OpOnes(size(A)) * B
-        
-    return OpSum(A,B)
+
+    return OpMinus(A,B)

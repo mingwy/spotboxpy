@@ -7,9 +7,7 @@ Created on Tue Jul 09 13:15:38 2013
 @author: User
 """
 import numpy as np
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.size import size
+from opSpot.opSpot import OpSpot
 
 class OpOnes(OpSpot):
     def __new__(subtype,m=None,n=None):
@@ -33,7 +31,7 @@ class OpOnes(OpSpot):
             
         op = OpSpot.__new__(subtype,'Ones',m,n)
         op.fill(1)
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):
@@ -51,7 +49,7 @@ class OpOnes(OpSpot):
         
         
     def double(self):
-        A = np.ones((size(self)))
+        A = np.ones(self.size())
         return A
         
     def multiply(self,x,mode):

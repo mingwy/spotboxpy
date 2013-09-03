@@ -6,11 +6,10 @@ Created on Thu Jul 18 14:10:58 2013
 
 @author: User
 """
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
-from spotboxpy.opMatrix import OpMatrix
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
+from opMatrix import OpMatrix
 
 class OpUnaryMinus(OpSpot):
     def __new__(subtype,A):
@@ -25,7 +24,7 @@ class OpUnaryMinus(OpSpot):
         op.linear = A.linear
         op.children.append(A)
         op.precedence = 2
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

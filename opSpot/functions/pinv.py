@@ -5,7 +5,7 @@ Created on Tue Jul 16 15:27:53 2013
 
 @author: User
 """
-from spotboxpy.opPInverse import OpPInverse
 
 def pinv(A):
+    from spotboxpy.opPInverse import OpPInverse
     return OpPInverse(A)

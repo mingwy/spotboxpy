@@ -8,11 +8,8 @@ Created on Thu Jul 18 15:25:28 2013
 """
 import numpy as np
 import scipy.linalg as sci
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.char import char
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isscalar import isscalar
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
 
 class OpMatrix(OpSpot):
     def __new__(subtype,A,description='Matrix'):
@@ -30,7 +27,7 @@ class OpMatrix(OpSpot):
         op.cflag = not np.isreal(A).all()
         op.sweepflag = True
         op.matrix = A
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):
@@ -49,11 +46,11 @@ class OpMatrix(OpSpot):
        
        
     def char(self):
-        if isscalar(self):
+        if self.isscalar():
             v = self.matrix
             string = str(v)
         else:
-            string = char(self)
+            string = super(OpMatrix,self).char()
         return string
             
     def double(self):

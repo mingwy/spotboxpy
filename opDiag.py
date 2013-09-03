@@ -9,8 +9,7 @@ Created on Tue Aug 27 17:16:09 2013
 import numpy as np
 import scipy.sparse as sparse
 import scipy.linalg as linalg
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
+from opSpot.opSpot import OpSpot
 
 class OpDiag(OpSpot):
     def __new__(subtype,D):
@@ -21,7 +20,7 @@ class OpDiag(OpSpot):
         op.cflag = not np.isreal(D).all()
         op.sweepflag = True
         op.diag = diag
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

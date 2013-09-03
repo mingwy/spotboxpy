@@ -7,8 +7,7 @@ Created on Tue Jul 23 16:36:37 2013
 @author: User
 """
 import numpy as np
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.opSpot import OpSpot
+from opSpot.opSpot import OpSpot
 
 class OpEye(OpSpot):
     def __new__(subtype,m=None,n=None):
@@ -31,7 +30,7 @@ class OpEye(OpSpot):
             return
             
         op = OpSpot.__new__(subtype,'Eye',m,n,np.eye(m,n))
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

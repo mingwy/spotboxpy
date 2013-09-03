@@ -8,10 +8,9 @@ Created on Wed Aug 28 17:01:20 2013
 """
 import numpy as np
 from opMatrix import OpMatrix
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpPower(OpSpot):
     def __new__(subtype,A,p):
@@ -45,7 +44,7 @@ class OpPower(OpSpot):
             fun = lambda op,x,mode: y.applyMultiply(x,mode)
         op.funHandle = fun
            
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

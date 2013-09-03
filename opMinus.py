@@ -4,11 +4,10 @@ Created on Fri Jul 19 14:54:13 2013
 
 @author: User
 """
-from spotboxpy.opMatrix import OpMatrix
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.isnumeric import isnumeric
-from spotboxpy.opSpot.isspot import isspot
+from opMatrix import OpMatrix
+from opSpot.opSpot import OpSpot
+from opSpot.isnumeric import isnumeric
+from opSpot.isspot import isspot
 
 class OpMinus(OpSpot):
     def __new__(subtype,A,B):
@@ -34,7 +33,7 @@ class OpMinus(OpSpot):
         op.children.append(A)
         op.children.append(B)
         op.precedence = 4
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

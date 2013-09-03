@@ -7,9 +7,7 @@ Created on Fri Jul 05 15:57:59 2013
 @author: User
 """
 import numpy as np
-from spotboxpy.opSpot.opSpot import OpSpot
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.size import size
+from opSpot.opSpot import OpSpot
 
 class OpZeros(OpSpot):
     def __new__(subtype,m=None,n=None):
@@ -34,7 +32,7 @@ class OpZeros(OpSpot):
         op = OpSpot.__new__(subtype,'Zeros',m,n)
         op.fill(0)
         op.sweepflag = True
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):
@@ -52,7 +50,7 @@ class OpZeros(OpSpot):
         
         
     def double(self):
-        A = np.zeros((size(self)))
+        A = np.zeros(self.size())
         return A
         
     def multiply(self,x,mode):

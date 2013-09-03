@@ -7,8 +7,7 @@ Created on Mon Jul 29 15:02:59 2013
 @author: User
 """
 import numpy as np
-from spotboxpy.opSpot.disp import disp
-from spotboxpy.opSpot.opSpot import OpSpot
+from opSpot.opSpot import OpSpot
 
 class OpEmpty(OpSpot):
     def __new__(subtype,m=0,n=0):
@@ -17,7 +16,7 @@ class OpEmpty(OpSpot):
             return
             
         op = OpSpot.__new__(subtype,'Empty',m,n)
-        disp(op)
+        op.disp()
         return op
         
     def __array_finalize__(self, op):

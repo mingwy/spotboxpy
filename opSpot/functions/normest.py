@@ -8,16 +8,15 @@ Created on Tue Jul 16 15:54:35 2013
 """
 import numpy as np
 import scipy.linalg as sci
-from size import size
 
 def normest(S,tol=1.0e-6,nargout=1):
     maxiter = 100
-    m,n = size(S)
+    m,n = S.size()
     cnt = 0
     
     v = np.ones((m,1))
     v[np.random.randn(m,1) < 0] = -1
-    x = np.dot(S.conj().T,v)
+    x = np.dot(S.double().conj().T,v)
     x = np.absolute(x)
     
     e = sci.norm(x)
@@ -29,8 +28,8 @@ def normest(S,tol=1.0e-6,nargout=1):
         e0 = e
         Sx = np.dot(S,x)
         if np.sum(Sx!=0) == 0:
-            Sx = np.random.rand(size(Sx))
-        x = np.dot(S.conj().T,Sx)
+            Sx = np.random.rand(Sx.size())
+        x = np.dot(S.double().conj().T,Sx)
         normx = sci.norm(x)
         e = normx/sci.norm(Sx)
         x = x/normx

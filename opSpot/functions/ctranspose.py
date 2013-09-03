@@ -5,7 +5,7 @@ Created on Mon Jul 15 15:54:38 2013
 
 @author: User
 """
-from spotboxpy.opCTranspose import OpCTranspose
 
 def ctranspose(A):
+    from spotboxpy.opCTranspose import OpCTranspose
     return OpCTranspose(A)
