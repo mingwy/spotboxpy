@@ -54,6 +54,16 @@ class OpTranspose(OpSpot):
         string = string + ".'"
         return string
         
+    def conj(self):
+        return self.children[0].ctranspose()
+        
+    def ctranspose(self):
+        return self.children[0].conj()
+        
+    def transpose(self):
+        self.children[0].disp()
+        return self.children[0]
+        
     def multiply(self,x,mode):
         y = self.opIntrnl.applyMultiply(x,mode)
         return y

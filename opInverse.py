@@ -48,6 +48,10 @@ class OpInverse(OpSpot):
         string = string.join(('inv(',')'))
         return string
         
+    def inv(self):
+        self.children[0].disp()
+        return self.children[0]
+        
     def multiply(self,x,mode):
         if mode == 1:
             A = self.children[0]

@@ -50,6 +50,16 @@ class OpCTranspose(OpSpot):
         string = string + "'"
         return string
         
+    def conj(self):
+        return self.children[0].transpose()
+        
+    def ctranspose(self):
+        self.children[0].disp()
+        return self.children[0]
+        
+    def transpose(self):
+        return self.children[0].conj()
+        
     def multiply(self,x,mode):
         if mode == 1:
             y = self.children[0].applyMultiply(x,2)

@@ -41,11 +41,21 @@ class OpConj(OpSpot):
         self.precedence = getattr(op,'precedence',None)
         self.sweepflag = getattr(op,'sweepflag',None)
         
-        
+       
     def char(self):
         string = self.children[0].char()
         string = string.join(('Conj(',')'))
         return string
+        
+    def conj(self):
+        self.children[0].disp()
+        return self.children[0]
+        
+    def ctranspose(self):
+        return self.children[0].transpose()
+        
+    def transpose(self):
+        return self.children[0].ctranspose()
         
     def multiply(self,x,mode):
         op1 = self.children[0]

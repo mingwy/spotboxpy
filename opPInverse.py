@@ -47,6 +47,10 @@ class OpPInverse(OpSpot):
         string = string.join(('pinv(',')'))
         return string
         
+    def pinv(self):
+        self.children[0].disp()
+        return self.children[0]
+        
     def multiply(self,x,mode):
         if mode == 1:
             A = self.children[0]
