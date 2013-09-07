@@ -31,3 +31,4 @@ class OpOrthogonal(OpSpot):
     def mldivide(self,b):
         x = np.dot(self.ctranspose(),b)
         return x
+        
