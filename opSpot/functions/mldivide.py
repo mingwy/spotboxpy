@@ -11,7 +11,7 @@ import scipy.linalg as sci
 from spotboxpy.opSpot.isspot import isspot
 
 def mldivide(A,B):
-    if np.iscomplexobj(A) or np.iscomplexobj(B):
+    if np.iscomplex(A).any() or np.iscomplex(B).any():
         cflag = True
     else:
         cflag = False
