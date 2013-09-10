@@ -19,7 +19,7 @@ class OpUnaryMinus(OpSpot):
             raise Exception ('Input operator is not valid.')
             return
         
-        op = OpSpot.__new__(subtype,'UnaryMinus',A.m,A.n,-A)
+        op = OpSpot.__new__(subtype,'UnaryMinus',A.m,A.n,-A.double())
         op.cflag = A.cflag
         op.linear = A.linear
         op.children.append(A)

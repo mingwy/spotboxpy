@@ -28,7 +28,7 @@ class OpSum(OpSpot):
             
         m = A.m
         n = A.n
-        op = OpSpot.__new__(subtype,'Sum',m,n,A+B)
+        op = OpSpot.__new__(subtype,'Sum',m,n,A.double()+B.double())
         op.cflag = A.cflag or B.cflag
         op.linear = A.linear or B.linear
         op.sweepflag = A.sweepflag and B.sweepflag

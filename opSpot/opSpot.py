@@ -91,5 +91,25 @@ for __file in os.listdir(__dir):
         __name = __file[:-3]
         __mod = getattr(fun,__name,None)
         setattr(OpSpot,__name,__mod)
+        
+        case1 = ['__neg__','__pos__']
+        case2 = ['__mul__','__sub__','__pow__']
+        char = ['r','i']
+        if '__' in __name:
+            if __name in case1:
+                pass
+            elif __name in case2:
+                __name1 = list(__name)
+                __name1.insert(2,char[1])
+                __name1 = ''.join(__name1)
+                setattr(OpSpot,__name1,__mod)
+            else:
+                for i in range(2):
+                    __name1 = list(__name)
+                    __name1.insert(2,char[i])
+                    __name1 = ''.join(__name1)
+                    setattr(OpSpot,__name1,__mod)
+    
+
     
     

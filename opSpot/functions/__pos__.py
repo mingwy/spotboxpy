@@ -8,5 +8,5 @@ Created on Mon Aug 26 15:58:57 2013
 @author: User
 """
 
-def uplus(A):
+def __pos__(A):
     return A
