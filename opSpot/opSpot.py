@@ -92,8 +92,8 @@ for __file in os.listdir(__dir):
         __mod = getattr(fun,__name,None)
         setattr(OpSpot,__name,__mod)
         
-        case1 = ['__neg__','__pos__']
-        case2 = ['__mul__','__sub__','__pow__']
+        case1 = ['__neg__','__pos__','__rmul__','__rdiv__','__rtruediv__','__rfloordiv__','__rsub__']
+        case2 = ['__div__','__truediv__','__floordiv__','__mul__','__sub__','__pow__']
         char = ['r','i']
         if '__' in __name:
             if __name in case1:
