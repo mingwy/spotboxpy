@@ -7,4 +7,4 @@ Created on Mon Jul 29 16:41:19 2013
 import numpy as np 
 
 def isposintmat(m):
-    return all(np.around(m) == m) and all(m > 0)
+    return all(np.around(m) == m) and all(m >= 0)

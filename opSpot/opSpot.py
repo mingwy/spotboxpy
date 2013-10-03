@@ -60,10 +60,12 @@ class OpSpot(np.ndarray):
         if self.sweepflag:
             y = self.multiply(x,mode)
         else:
-            q = x.shape[1]
+            mX = x.shape[0]
+            nX = x.size/mX
+            q = nX
             if q > 1:
                 if fun.isscalar(self):
-                    y = np.ndarray.__new__(type(x),(x.shape[0],x.shape[1]))
+                    y = np.ndarray.__new__(type(x),(mX,nX))
                     y.fill(0)
                 elif mode == 1:
                     y = np.ndarray.__new__(type(x),(self.m,q))
@@ -71,8 +73,11 @@ class OpSpot(np.ndarray):
                 else:
                     y = np.ndarray.__new__(type(x),(self.n,q))
                     y.fill(0)
-            for i in range(q):
-                y[:,i] = self.multiply(x[:,i],mode)
+                    
+                for i in range(q):
+                    y[:,i] = self.multiply(x[:,i],mode)
+            else:
+                y = self.multiply(x,mode)
         
         return y
         
