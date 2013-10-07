@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+OPRESTRICTION   Restriction operator.
+
 Created on Mon Sep 30 15:24:39 2013
 
 @author: User
