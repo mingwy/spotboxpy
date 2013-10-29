@@ -12,15 +12,21 @@ from spot.utils.isposintmat import isposintmat
 
 class OpMask(OpSpot):
     def __new__(subtype,idx,n=None):
+        if np.isscalar(idx):
+            idx = np.array([idx])
+        
         idx = idx.flatten(1)
+        
         if idx.dtype == bool and n is None:
             n = idx.size
+        elif n is None:
+            n = np.max(idx) + 1
             
         if idx.dtype == bool:
           if idx.size > n:
               raise Exception ('Index exceeds operator dimensions.')
         elif isposintmat(idx) or idx.size == 0:
-            if idx.size != 0 and np.max(idx) > n:
+            if idx.size != 0 and np.max(idx) >= n:
                 raise Exception ('Index exceeds operator dimensions.')
         else:
             raise Exception ('Subscript indices must be either real integers >= 0 or logicals.')
@@ -30,6 +36,7 @@ class OpMask(OpSpot):
         A = mask * np.eye(n)
         op = OpSpot.__new__(subtype,'Mask',n,n,A)
         op.mask = mask
+        op.disp()
         return op
         
     def __array_finalize__(self, op):
